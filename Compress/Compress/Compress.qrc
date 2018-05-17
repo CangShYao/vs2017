@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/Compress">
+        <file>306.ico</file>
+    </qresource>
+</RCC>
