@@ -1,9 +1,10 @@
 #include <iostream>
+#include <windows.h>
 #include "glut.h"
 using namespace std;
 
 GLfloat mat[4] = { 0.5, 0.5, 0.9, 0 };
-//¹âÔ´Î»ÖÃ
+//å…‰æºä½ç½®
 GLfloat position[] = { 1.0, 1.0, 5.0, 0.0 };
 static int count_number = 0;
 
@@ -111,30 +112,84 @@ void keyboard(unsigned char key, int x, int y)
 
 			if (count_number % 3 == 0)
 			{
-				mat[0] = 1.0;
-				mat[1] = 0;
-				mat[2] = 0;
-				display();
+				for (int i = 0; i < 10; i++)
+				{
+					mat[0] -= 0.5 / 10;
+					mat[1] += 0.5 / 10;
+					mat[2] -= 0.5 / 10;
+					display();
+					Sleep(150);
+				}
+// 				mat[0] = 0;
+// 				mat[1] = 1;
+// 				mat[2] = 0.4;
+// 				display();
+				cout << "green" << endl;
 				count_number++;
 				break;
 			}
 			if (count_number % 3 == 1)
 			{
-				mat[0] = 0;
-				mat[1] = 1.0;
-				mat[2] = 0;
-				display();
+				for (int i = 0; i < 10; i++)
+				{
+					mat[0] += 1 / 10;
+					mat[1] += 0 / 10;
+					mat[2] += 0.6 / 10;
+					display();
+					Sleep(150);
+				}
+// 				mat[0] = 1;
+// 				mat[1] = 1.0;
+// 				mat[2] = 1;
+// 				display();
 				count_number++;
+				cout << "white" << endl;
 				break;
 			}
 			if (count_number % 3 == 2)
 			{
-				mat[0] = 0.5;
-				mat[1] = 0.5;
-				mat[2] = 0.9;
-				display();
+				for (int i = 0; i < 10; i++)
+				{
+					mat[0] -= 0.5 / 10;
+					mat[1] -= 0.5 / 10;
+					mat[2] -= 0.1 / 10;
+					display();
+					Sleep(150);
+				}
+// 				mat[0] = 0.5;
+// 				mat[1] = 0.5;
+// 				mat[2] = 0.9;
+// 				display();
 				count_number++;
+				cout << "origin color" << endl;
 				break;
+			}
+		}
+		default:
+		{
+			cout << "Unhandled key press " << key << endl;
+			break;
+		}
+	}
+}
+
+/*
+* Main Loop
+*/
+int main(int argc, char **argv)
+{
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
+	glutInitWindowSize(400, 400);
+	glutInitWindowPosition(150, 150);
+	glutCreateWindow("hello world");
+	init();
+	glutReshapeFunc(reshape);
+	glutDisplayFunc(display);
+	glutKeyboardFunc(keyboard);
+	glutMainLoop();
+	return 0;
+}				break;
 			}
 		}
 		default:
