@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2016
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GraphicHomework1", "GraphicHomework1\GraphicHomework1.vcxproj", "{EB992E61-B2BD-4F36-A826-DCAFBCB6F6CA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB992E61-B2BD-4F36-A826-DCAFBCB6F6CA}.Debug|x64.ActiveCfg = Debug|x64
+		{EB992E61-B2BD-4F36-A826-DCAFBCB6F6CA}.Debug|x64.Build.0 = Debug|x64
+		{EB992E61-B2BD-4F36-A826-DCAFBCB6F6CA}.Debug|x86.ActiveCfg = Debug|Win32
+		{EB992E61-B2BD-4F36-A826-DCAFBCB6F6CA}.Debug|x86.Build.0 = Debug|Win32
+		{EB992E61-B2BD-4F36-A826-DCAFBCB6F6CA}.Release|x64.ActiveCfg = Release|x64
+		{EB992E61-B2BD-4F36-A826-DCAFBCB6F6CA}.Release|x64.Build.0 = Release|x64
+		{EB992E61-B2BD-4F36-A826-DCAFBCB6F6CA}.Release|x86.ActiveCfg = Release|Win32
+		{EB992E61-B2BD-4F36-A826-DCAFBCB6F6CA}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {95662886-5654-499B-B6B6-9AFDCC61FE55}
+	EndGlobalSection
+EndGlobal
