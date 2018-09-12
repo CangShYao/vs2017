@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <cmath>
 #include <fstream>
 #include <string>
 #include <sstream>
@@ -7,12 +8,17 @@
 #include "glut.h"
 using namespace std;
 
+#define PI 3.1415926535
+
 GLfloat mat[4] = { 0.5, 0.5, 0.9, 0 };
 //光源位置
 GLfloat position[] = { 1.0, 1.0, 5.0, 0.0 };
 vector<vector<double>> vArr;
 vector<vector<double>> fArr;
 static int count_number = 0;
+static float c =  PI / 180.0f;
+static int du = 90, oldmy = -1, oldmx = -1;
+static float r = 1.5f, h = 0.0f;
 
 void init(void)
 {
@@ -38,14 +44,22 @@ void init(void)
 }
 
 
-void display(void)
+void displayTeapot(void)
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glPushMatrix();
+// 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+// 	glPushMatrix();
+// 	glTranslatef(8, 8, 0.0);
+// 	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat);
+// 	glutSolidTeapot(3.0);
+// 	glPopMatrix();
+// 	glFlush();
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //清除缓冲，GL_COLOR_BUFFER_BIT ：颜色缓冲标志位
+	glLoadIdentity();                                       //重置当前矩阵为4*4的单位矩阵
 	glTranslatef(8, 8, 0.0);
+	gluLookAt(r*cos(c*du), h, r*sin(c*du), 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);   //从视点看远点
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat);
-	glutSolidTeapot(3.0);
-	glPopMatrix();
+	glutWireTeapot(3.0f);
+	glutSwapBuffers();
 	glFlush();
 }
 
@@ -93,8 +107,12 @@ void readFile(string fileName)
 void display1(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(1.0f, 1.0f, 1.0f, 0);
 	//glPushMatrix();
+	glLoadIdentity();
 	glTranslatef(8, 8, 0.0);
+	gluLookAt(r*cos(c*du), h, r*sin(c*du), 0, 0, 0, 0, 1, 0);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat);
 	for (int i = 0; i < fArr.size(); i++)
 	{
 		int a = fArr[i][0];
@@ -103,30 +121,50 @@ void display1(void)
 		glBegin(GL_LINES);
 		glVertex3d(vArr[a - 1][0], vArr[a - 1][1], vArr[a - 1][2]);
 		glVertex3d(vArr[b - 1][0], vArr[b - 1][1], vArr[b - 1][2]);
+// 		glEnd();
+// 		glBegin(GL_LINES);
+		glVertex3d(vArr[b - 1][0], vArr[b - 1][1], vArr[b - 1][2]);
+		glVertex3d(vArr[c - 1][0], vArr[c - 1][1], vArr[c - 1][2]);
+// 		glEnd();
+// 		glBegin(GL_LINES);
+		glVertex3d(vArr[a - 1][0], vArr[a - 1][1], vArr[a - 1][2]);
 		glVertex3d(vArr[c - 1][0], vArr[c - 1][1], vArr[c - 1][2]);
 		glEnd();
 	}
 	//glPopMatrix();
+	glutSwapBuffers();
 	glFlush();
 }
 
-void displayBunny(void)
+void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	//glPushMatrix();
+	glClearColor(1.0f, 1.0f, 1.0f, 0);
+	glLoadIdentity();
 	glTranslatef(8, 8, 0.0);
+	gluLookAt(r*cos(c*du), h, r*sin(c*du), 0, 0, 0, 0, 1, 0);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat);
 	for (int i = 0; i < fArr.size(); i++)
 	{
 		int a = fArr[i][0];
 		int b = fArr[i][1];
 		int c = fArr[i][2];
 		glBegin(GL_LINES);
-		glVertex3d(vArr[a - 1][0] * 10, vArr[a - 1][1] * 10, vArr[a - 1][2] * 10);
-		glVertex3d(vArr[b - 1][0] * 10, vArr[b - 1][1] * 10, vArr[b - 1][2] * 10);
-		glVertex3d(vArr[c - 1][0] * 10, vArr[c - 1][1] * 10, vArr[c - 1][2] * 10);
+		glVertex3d(vArr[a - 1][0] * 15, vArr[a - 1][1] * 15, vArr[a - 1][2] * 15);
+		glVertex3d(vArr[b - 1][0] * 15, vArr[b - 1][1] * 15, vArr[b - 1][2] * 15);
+		// 		glEnd();
+		// 		glBegin(GL_LINES);
+		glVertex3d(vArr[b - 1][0] * 15, vArr[b - 1][1] * 15, vArr[b - 1][2] * 15);
+		glVertex3d(vArr[c - 1][0] * 15, vArr[c - 1][1] * 15, vArr[c - 1][2] * 15);
+		// 		glEnd();
+		// 		glBegin(GL_LINES);
+		glVertex3d(vArr[a - 1][0] * 15, vArr[a - 1][1] * 15, vArr[a - 1][2] * 15);
+		glVertex3d(vArr[c - 1][0] * 15, vArr[c - 1][1] * 15, vArr[c - 1][2] * 15);
 		glEnd();
 	}
 	//glPopMatrix();
+	glutSwapBuffers();
 	glFlush();
 }
 
@@ -142,6 +180,22 @@ void reshape(int w, int h)
 		glOrtho(0.0, 16.0*(GLfloat)w / (GLfloat)h, 0.0, 16.0,
 			-10.0, 10.0);
 	glMatrixMode(GL_MODELVIEW);
+}
+
+void Mouse(int button, int state, int x, int y) //处理鼠标点击
+{
+	if (state == GLUT_DOWN) //第一次鼠标按下时,记录鼠标在窗口中的初始坐标
+		oldmx = x, oldmy = y;
+}
+
+void onMouseMove(int x, int y) //处理鼠标拖动
+{
+	du += x - oldmx; //鼠标在窗口x轴方向上的增量加到视点绕y轴的角度上，这样就左右转了
+	h += 0.03f*(y - oldmy); //鼠标在窗口y轴方向上的改变加到视点的y坐标上，就上下转了
+	if (h > 1.0f) h = 1.0f; //视点y坐标作一些限制，不会使视点太奇怪
+	else if (h < -1.0f) h = -1.0f;
+	oldmx = x, oldmy = y; //把此时的鼠标坐标作为旧值，为下一次计算增量做准备
+	glutPostRedisplay();
 }
 
 void keyboard(unsigned char key, int x, int y)
@@ -267,9 +321,9 @@ int main(int argc, char **argv)
 	string fname = "cube.obj";
 	string fname1 = "bunny_200.obj";
 	string fname2 = "bunny_1k.obj";
-	readFile(fname);
+	readFile(fname2);
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(400, 400);
 	glutInitWindowPosition(150, 150);
 	glutCreateWindow("hello world");
@@ -277,6 +331,8 @@ int main(int argc, char **argv)
 	glutReshapeFunc(reshape);
 	glutDisplayFunc(display);
 	glutKeyboardFunc(keyboard);
+	glutMouseFunc(Mouse);
+	glutMotionFunc(onMouseMove);
 	glutMainLoop();
 	return 0;
 }
