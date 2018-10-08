@@ -44,6 +44,5 @@ void Spline::deleteControlPoint(int selectedPoint)
 
 TriangleMesh * Spline::OutputTriangles(ArgParser * args)
 {
-	TriangleMesh * answer;
-	return answer;
+	return nullptr;
 }
